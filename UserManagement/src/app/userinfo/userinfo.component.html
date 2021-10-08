@@ -1,0 +1,92 @@
+
+ <div>
+     <h2>Update User</h2>
+ </div>
+ <form #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="authService.selecteduser._id">
+    <div class="row">
+      <div class="input-field col s12">
+        <label>Name :
+          <label class="red-text"></label></label> &nbsp;
+        <input type="text" name="name" #name="ngModel" [(ngModel)]="authService.selecteduser.name" placeholder="Enter full name" required>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <label>Phone :</label> &nbsp;
+        <input type="text" name="contact" #name="ngModel" [(ngModel)]="authService.selecteduser.contact" placeholder="Phone"  >
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <label>Email :</label> &nbsp;&nbsp;&nbsp;
+        <input type="text" name="email" #name="ngModel" [(ngModel)]="authService.selecteduser.email" placeholder="Email">
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <label>job :</label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" name="job" #name="ngModel" [(ngModel)]="authService.selecteduser.job" placeholder="Enter the job title">
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+          <label>Text :</label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="text" #name="ngModel" [(ngModel)]="authService.selecteduser.text" placeholder="Enter the text">
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="input-field col s10">
+        <button class="btn btn-danger" type="button" (click)="resetForm(UserForm)">Cancel</button>
+        &nbsp;&nbsp;&nbsp;
+         <i class="fa fa-trash" aria-hidden="true"></i>
+         <!-- <i class="fa fa-pencil" aria-hidden="true">edit</i> -->
+         <!-- <mat-icon>delete</mat-icon> -->
+
+        <button class="btn btn-info" type="submit" [disabled]="!UserForm.valid">Save</button>
+      </div>
+    </div>
+  </form>
+ <br>
+ <br>
+<div> <h2> User List </h2></div>
+
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Job</th>
+        <th scope="col">Emai</th>
+        <th scope="col">Text</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+  <tr *ngFor="let user of authService.userlist">
+                      <td>{{user.name}}</td> 
+                      <td>{{user.contact}}</td> 
+                      <td>{{user.job}}</td>  
+                      <td>{{user.email}}</td>  
+                      <td>{{user.text}}</td>    
+                      <td>
+                           <a class="action-btn" (click)="onEdit(user)" >
+                             <i class="material-icons">edit</i>
+                          </a>
+                          <a class="action-btn" (click)="onDelete(user._id,UserForm)">
+                            <span class="material-icons-outlined">
+                                delete
+                                </span> 
+                          </a> 
+                        </td>
+                    </tr>
+      
+    </tbody>
+  </table>
